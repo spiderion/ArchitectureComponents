@@ -1,11 +1,9 @@
-package developer.olaru.ion.architecturecomponents.D_room_data_base.dao
+package developer.olaru.ion.architecturecomponents.dRoomDataBase.dao
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
-import developer.olaru.ion.architecturecomponents.D_room_data_base.entity.Word
+import android.arch.persistence.room.*
+import android.os.FileObserver.DELETE
+import developer.olaru.ion.architecturecomponents.dRoomDataBase.entity.Word
 
 @Dao
 interface WordDao  {
@@ -18,6 +16,10 @@ interface WordDao  {
 
     @Query("DELETE FROM word_table")
     fun deleteAll()
+
+    @Delete
+    fun deleteWord(word: Word)
+
 
     // there are also @Delete and @Update but we are not using this in the app
 }
