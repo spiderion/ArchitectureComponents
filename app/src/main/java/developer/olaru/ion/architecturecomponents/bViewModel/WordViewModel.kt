@@ -11,10 +11,8 @@ import javax.inject.Inject
 // Warning never pass context into ViewModel instance ..do not store activity fragment or view can cause (MEMORY LEAK)
 class  WordViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
-   @Inject
-   lateinit var mRepository : WordRepository
-
-
+    @Inject
+    lateinit var mRepository : WordRepository
 
     private var mAllWords: LiveData<List<Word>>?=null
 

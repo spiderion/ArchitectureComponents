@@ -17,36 +17,39 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-  class WordDao1Test {
+class WordDao1Test {
 
 
-    private lateinit var database: WordRoomDataBase
+  private lateinit var database: WordRoomDataBase
 
 
   @get: Rule
   var instantTaskExecutorRule = InstantTaskExecutorRule()
-    @Before
-    fun init(){
-        database = Room.inMemoryDatabaseBuilder(
-                InstrumentationRegistry.getContext(),
-                WordRoomDataBase::class.java).allowMainThreadQueries()
-                .build()
-    }
-    @After
-    fun closeDb(){
-        database.close()
-    }
+
+  @Before
+  fun init() {
+    database = Room.inMemoryDatabaseBuilder(
+            InstrumentationRegistry.getContext(),
+            WordRoomDataBase::class.java).allowMainThreadQueries()
+            .build()
+  }
+
+  @After
+  fun closeDb() {
+    database.close()
+  }
+
   @Test
-  fun listWordIsEmptyWhenNorWordInsertedTest(){
+  fun listWordIsEmptyWhenNorWordInsertedTest() {
     val words = database.wordDao().allWords.blockingObserve()
 
-   assertTrue(words!!.isEmpty())
+    assertTrue(words!!.isEmpty())
 
   }
 
 
   @Test
-  fun wordInsertedMatchWordFetchedTest(){
+  fun wordInsertedMatchWordFetchedTest() {
 
     val cashedWord = Word("hello")
     database.wordDao().insert(cashedWord)
@@ -54,13 +57,13 @@ import org.junit.runner.RunWith
     val words = database.wordDao().allWords.blockingObserve()
 
 
-   assertEquals(words!![0],cashedWord)
+    assertEquals(words!![0], cashedWord)
 
 
   }
 
   @Test
-  fun insertAndDeleteOneWordTest(){
+  fun insertAndDeleteOneWordTest() {
 
     val word = Word("goingToBeDeleted")
     database.wordDao().insert(word)
@@ -69,15 +72,12 @@ import org.junit.runner.RunWith
 
     val words = database.wordDao().allWords.blockingObserve()
 
-
-
     assertTrue(words!!.isEmpty())
-
 
   }
 
   @Test
-  fun insertMoreWordsAndCheckIfAllDeletedIsTrue(){
+  fun insertMoreWordsAndCheckIfAllDeletedIsTrue() {
     val word1 = Word("hi")
     val word2 = Word("hello")
     val word3 = Word("android")
@@ -85,10 +85,8 @@ import org.junit.runner.RunWith
     database.wordDao().insert(word2)
     database.wordDao().insert(word3)
 
-
     database.wordDao().deleteAll()
     val words = database.wordDao().allWords.blockingObserve()
-
 
     assertTrue(words!!.isEmpty())
 

@@ -9,7 +9,7 @@ import developer.olaru.ion.architecturecomponents.dRoomDataBase.entity.Word
 import developer.olaru.ion.architecturecomponents.R
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class WordListAdapter(val listener: Clickable) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
+class WordListAdapter(private val clickable: Clickable) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
 
     private var mWords: List<Word>? = null
 
@@ -26,18 +26,18 @@ class WordListAdapter(val listener: Clickable) : RecyclerView.Adapter<WordListAd
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 
-        holder.bind(mWords?.get(position),listener)
+        holder.bind(mWords?.get(position),clickable)
     }
 
     override fun getItemCount(): Int = mWords?.size ?: 0
 
     class WordViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(word: Word? , listener: Clickable) {
+        fun bind(word: Word?, clickable: Clickable) {
             with(itemView) {
                 wordTextView.text = word?.word ?: "No Words"
 
-                parentLayout.setOnLongClickListener{listener.deleteWord(word)
+                parentLayout.setOnLongClickListener{clickable.deleteWord(word)
                     Log.i("longClick","delete")
                 false}
             }

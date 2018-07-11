@@ -20,7 +20,6 @@ import developer.olaru.ion.architecturecomponents.utils.Constants.Companion.NEW_
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.*
 
-
 class MainActivity : AppCompatActivity(), Clickable {
     private var mWordViewModel: WordViewModel? = null
 
