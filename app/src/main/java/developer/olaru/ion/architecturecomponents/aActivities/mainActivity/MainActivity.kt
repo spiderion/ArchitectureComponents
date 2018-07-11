@@ -21,24 +21,24 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.*
 
 
-class MainActivity : AppCompatActivity(),Clickable {
+class MainActivity : AppCompatActivity(), Clickable {
     private var mWordViewModel: WordViewModel? = null
 
-    private lateinit var listener : Clickable
+    private lateinit var clickable: Clickable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         //get view model provider
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
-        listener = this
-        val adapter = WordListAdapter(listener)
+        clickable = this
+        val adapter = WordListAdapter(clickable)
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(this)
-
 
         mWordViewModel?.getAllWords()?.observe(this, Observer { words -> adapter.setWords(words) })
 
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity(),Clickable {
 
             startActivityForResult<NewWordActivity>(NEW_WORD_ACTIVITY_REQUEST_CODE)
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -67,14 +66,10 @@ class MainActivity : AppCompatActivity(),Clickable {
 
     override fun deleteWord(word: Word?) {
 
-        alert("are you sure you want to delete this?","Delete word"){
+        alert("are you sure you want to delete this?", "Delete word") {
             yesButton { mWordViewModel?.deleteWord(word!!) }
-            noButton { Log.i("noButton","not deleted ") }
+            noButton { Log.i("noButton", "not deleted ") }
         }.show()
 
-
     }
-
-
-
 }

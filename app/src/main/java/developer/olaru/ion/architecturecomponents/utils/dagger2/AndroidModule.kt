@@ -3,6 +3,7 @@ package developer.olaru.ion.architecturecomponents.utils.dagger2
 import android.app.Application
 import dagger.Module
 import dagger.Provides
+import developer.olaru.ion.architecturecomponents.bViewModel.WordViewModel
 import developer.olaru.ion.architecturecomponents.cRepository.WordRepository
 import developer.olaru.ion.architecturecomponents.dRoomDataBase.WordRoomDataBase
 import javax.inject.Singleton
@@ -17,13 +18,10 @@ class AndroidModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun providesWordRepository():WordRepository = WordRepository(application)
+    fun providesWordRepository():WordRepository = WordRepository(providesWordDataBase())
 
     @Provides
     @Singleton
     fun providesWordDataBase():WordRoomDataBase =  WordRoomDataBase.getDatabase(application)
-
-
-
 
 }

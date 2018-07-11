@@ -6,6 +6,6 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "word_table")
  data class Word(
-           @field:PrimaryKey
-           @field:ColumnInfo(name = "word")
-           val word: String)
+        @field:PrimaryKey
+        @field:ColumnInfo(name = "word")
+        val word: String)

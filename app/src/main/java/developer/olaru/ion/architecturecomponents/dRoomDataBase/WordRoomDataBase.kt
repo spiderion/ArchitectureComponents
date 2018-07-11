@@ -7,13 +7,11 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import developer.olaru.ion.architecturecomponents.dRoomDataBase.dao.WordDao
 import developer.olaru.ion.architecturecomponents.dRoomDataBase.entity.Word
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.launch
 
 @Database(entities = [Word::class], version = 1)//When you modify the database schema, you'll need to update the version number and define how to handle migrations
 abstract class WordRoomDataBase : RoomDatabase() {
 
-    abstract fun wordDao(): WordDao?
+    abstract fun wordDao(): WordDao
 
     companion object {
 
@@ -47,6 +45,7 @@ abstract class WordRoomDataBase : RoomDatabase() {
                     word = Word("World")
                     mDao?.insert(word)
                 }*/
+                
             }
         }
     }

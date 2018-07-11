@@ -13,4 +13,5 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(wordViewModel : WordViewModel)
     fun inject(wordRepository: WordRepository)
+    fun wordRepository():WordRepository
 }

@@ -2,6 +2,7 @@
   <dictionary name="legend">
     <words>
       <w>anko</w>
+      <w>coroutines</w>
     </words>
   </dictionary>
 </component>
